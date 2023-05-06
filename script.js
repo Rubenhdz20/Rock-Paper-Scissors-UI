@@ -16,13 +16,23 @@ function getComputerChoice() {
 function win(user, computer) {
     userScore++;
     userSpan.textContent = userScore;
-    resultDiv.textContent = `${user} beats ${computer}, You win!!`
+    resultDiv.textContent = `${user} beats ${computer}, You win!!`;
+
+    if (userScore === 5) {
+        resultDiv.textContent = `Congratulations, you won the game!`;
+        restartGame();
+    }
 }
 
 function lose(user, computer) {
     computerScore++;
     computerSpan.textContent = computerScore;
-    resultDiv.textContent = `${computer} beats ${user}, You lose!!`
+    resultDiv.textContent = `${computer} beats ${user}, You lose!!`;
+
+    if (computerScore === 5) {
+        resultDiv.textContent = `The computer won the game!`;
+        restartGame();
+    }
 }
 
 function draw() {
@@ -48,6 +58,10 @@ function playRound(userChoice) {
             draw(userChoice, computerChoice);
             break;
     }
+    if (userScore === 5 && computerScore === 5) {
+        resultDiv.textContent = `It's a tie!`;
+        restartGame();
+    }
 }
 
 rockDiv.addEventListener('click', function() {
@@ -61,3 +75,10 @@ paperDiv.addEventListener('click', function() {
 scissorsDiv.addEventListener('click', function() {
     playRound('scissors');
 });
+
+function restartGame() {
+    userScore = 0;
+    computerScore = 0;
+    userSpan.textContent = 0;
+    computerSpan.textContent = 0;
+  }
